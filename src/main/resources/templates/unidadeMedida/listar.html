@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+	<div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
+		Nenhuma unidade de Medida cadastrada</div>
+	<div class="alert alert-primary" th:if="${mensagem != null}"
+		th:text="${mensagem}"></div>
+	<div th:if="${not #lists.isEmpty(lista)}">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nome</th>
+					<th>Opções</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="unidadeMedida : ${lista}">
+					<td th:text="${unidadeMedida.id}"></td>
+					<td th:text="${unidadeMedida.nome}" width="70%"></td>
+					<td><a class="btn btn-primary btn-sm"
+						th:href="@{/unidadeMedida/editar(id=${unidadeMedida.id})}">Editar</a> 
+						<a	class="btn btn-primary btn-sm"
+						th:href="@{/unidadeMedida/excluir(id=${unidadeMedida.id})}"
+						onclick="return confirm('Você realmente deseja excluir essa receita?')">Excluir</a>
+						<a class="btn btn-primary btn-sm"
+						href="#">Ver Unidade de Medida</a> 
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+</html>
